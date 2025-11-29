@@ -50,7 +50,7 @@ $routes->get('produk/cari', 'ProdukUser::cari');
 $routes->get('tentang_kami', 'TentangKami::index');
 
 $routes->get('kontak', 'Kontak::index');
-$routes->post('kontak/kirim', 'Contact::send');
+$routes->post('kontak/send', 'Kontak::send');
 // ADMIN PESAN
 $routes->get('pesan', 'Pesan::index');
 $routes->get('pesan/(:num)', 'Admin\Pesan::detail/$1');

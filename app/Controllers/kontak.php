@@ -2,7 +2,10 @@
 
 namespace App\Controllers;
 
-class Kontak extends BaseController
+use App\Controllers\BaseController;
+use App\Models\PesanModel;
+
+class kontak extends BaseController
 {
     public function index()
     {
@@ -18,6 +21,7 @@ class Kontak extends BaseController
             'email'  => $this->request->getPost('email'),
             'subjek' => $this->request->getPost('subjek'),
             'pesan'  => $this->request->getPost('pesan'),
+            'status' => 'baru'
         ]);
 
         return redirect()->to('/kontak')->with('success', 'Pesan berhasil dikirim!');

@@ -67,6 +67,7 @@
               <th class="p-3 text-left">Nama</th>
               <th class="p-3 text-left">Email</th>
               <th class="p-3 text-left">Subjek</th>
+              <th class="p-3 text-left">Pesan</th>
               <th class="p-3 text-left">Status</th>
               <th class="p-3 text-left">Aksi</th>
             </tr>
@@ -78,6 +79,7 @@
               <td class="p-3"><?= $p['nama'] ?></td>
               <td class="p-3"><?= $p['email'] ?></td>
               <td class="p-3"><?= $p['subjek'] ?></td>
+              <td class="p-3"><?= $p['pesan'] ?></td>
               <td class="p-3 capitalize">
                 <?php if ($p['status'] == 'baru'): ?>
                   <span class="text-white bg-red-500 px-3 py-1 rounded text-sm">Baru</span>

@@ -102,37 +102,46 @@
       </div>
     </div>
 
-    <!-- Formulir Kontak -->
-    <div class="bg-white p-6 rounded-xl shadow-md">
-      <h2 class="text-2xl font-bold text-blue-700 mb-5">Kirim Pesan</h2>
+   <!-- Formulir Kontak -->
+<div class="bg-white p-6 rounded-xl shadow-md">
+  <h2 class="text-2xl font-bold text-blue-700 mb-5">Kirim Pesan</h2>
 
-      <form action="<?= base_url('kontak/kirim') ?>" method="POST" class="space-y-5">
+  <form action="<?= base_url('kontak/send') ?>" method="POST" class="space-y-5">
 
-        <div>
-          <label class="font-semibold">Nama Lengkap</label>
-          <input type="text" class="w-full px-4 py-3 border rounded-lg focus:ring focus:ring-blue-300"
-            placeholder="Isi nama lengkap Anda" required>
-        </div>
-
-        <div>
-          <label class="font-semibold">Email</label>
-          <input type="email" class="w-full px-4 py-3 border rounded-lg focus:ring focus:ring-blue-300"
-            placeholder="Email aktif" required>
-        </div>
-
-        <div>
-          <label class="font-semibold">Pesan</label>
-          <textarea class="w-full px-4 py-3 border rounded-lg focus:ring focus:ring-blue-300" rows="5"
-            placeholder="Tulis pesan Anda" required></textarea>
-        </div>
-
-        <button class="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-900 transition">
-          Kirim Pesan
-        </button>
-
-      </form>
+    <div>
+      <label class="font-semibold">Nama Lengkap</label>
+      <input type="text" name="nama"
+        class="w-full px-4 py-3 border rounded-lg focus:ring focus:ring-blue-300"
+        placeholder="Isi nama lengkap Anda" required>
     </div>
 
+    <div>
+      <label class="font-semibold">Email</label>
+      <input type="email" name="email"
+        class="w-full px-4 py-3 border rounded-lg focus:ring focus:ring-blue-300"
+        placeholder="Email aktif" required>
+    </div>
+
+    <div>
+      <label class="font-semibold">Subjek</label>
+      <input type="text" name="subjek"
+        class="w-full px-4 py-3 border rounded-lg focus:ring focus:ring-blue-300"
+        placeholder="Judul pesan / keperluan" required>
+    </div>
+
+    <div>
+      <label class="font-semibold">Pesan</label>
+      <textarea name="pesan"
+        class="w-full px-4 py-3 border rounded-lg focus:ring focus:ring-blue-300" rows="5"
+        placeholder="Tulis pesan Anda" required></textarea>
+    </div>
+
+    <button class="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-900 transition">
+      Kirim Pesan
+    </button>
+
+  </form>
+</div>
   </section>
 
 
