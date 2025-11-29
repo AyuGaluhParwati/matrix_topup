@@ -52,7 +52,8 @@ $routes->get('tentang_kami', 'TentangKami::index');
 $routes->get('kontak', 'Kontak::index');
 $routes->get('kontak', 'Contact::index');
 $routes->post('kontak/kirim', 'Contact::send');
-$routes->get('admin/kontak', 'Contact::admin');
+
+
 
 
 

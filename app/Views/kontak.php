@@ -135,13 +135,6 @@
 
   </section>
 
-<iframe 
-    width="100%" 
-    height="500" 
-    frameborder="0" 
-    src="https://www.bing.com/maps/embed?h=500&w=800&cp=-8.793452~115.164459&lvl=16&typ=d&sty=r&src=SHELL&FORM=MBEDV8"
-    scrolling="no">
-</iframe>
 
 
 
