@@ -9,25 +9,17 @@ class Kontak extends BaseController
         return view('kontak');
     }
 
-  public function send()
+    public function send()
     {
-        $contact = new ContactModel();
+        $model = new PesanModel();
 
-        $contact->save([
-            'nama'  => $this->request->getPost('nama'),
-            'email' => $this->request->getPost('email'),
-            'pesan' => $this->request->getPost('pesan'),
+        $model->save([
+            'nama'   => $this->request->getPost('nama'),
+            'email'  => $this->request->getPost('email'),
+            'subjek' => $this->request->getPost('subjek'),
+            'pesan'  => $this->request->getPost('pesan'),
         ]);
 
         return redirect()->to('/kontak')->with('success', 'Pesan berhasil dikirim!');
-    }
-
-    // Halaman admin
-    public function admin()
-    {
-        $contact = new ContactModel();
-        $data['kontak'] = $contact->orderBy('id', 'DESC')->findAll();
-
-        return view('admin/kontak_list', $data);
     }
 }

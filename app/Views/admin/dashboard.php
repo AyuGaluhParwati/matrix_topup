@@ -27,7 +27,7 @@
   <i class="fa-solid fa-tags mr-3"></i>
   Product
 </a>
- <a href="kontak_list" class="flex items-center p-2 rounded hover:bg-blue-600 transition"><i class="fa-solid fa-cart-shopping mr-3"></i> laporan</a>
+ <a href="<?= base_url('pesan') ?>" class="flex items-center p-2 rounded hover:bg-blue-600 transition"><i class="fa-solid fa-cart-shopping mr-3"></i> pesan</a>
 
       </nav>
       <div class="p-4 border-t border-blue-600">

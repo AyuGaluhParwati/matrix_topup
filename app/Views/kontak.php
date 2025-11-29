@@ -106,7 +106,7 @@
     <div class="bg-white p-6 rounded-xl shadow-md">
       <h2 class="text-2xl font-bold text-blue-700 mb-5">Kirim Pesan</h2>
 
-      <form action="#" method="POST" class="space-y-5">
+      <form action="<?= base_url('kontak/kirim') ?>" method="POST" class="space-y-5">
 
         <div>
           <label class="font-semibold">Nama Lengkap</label>
