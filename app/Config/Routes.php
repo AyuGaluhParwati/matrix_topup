@@ -42,15 +42,16 @@ $routes->get('produk/delete/(:num)', 'Produk::delete/$1');
 // =====================
 
 // List produk
+$routes->get('produk/cari', 'ProdukUser::cari');            // lebih spesifik dulu
+$routes->get('produk/kategori/(:segment)', 'ProdukUser::kategori/$1');
 $routes->get('ProdukUser', 'ProdukUser::index');
 
-// Pencarian produk (RUTE KHUSUS HARUS DIDULUKAN)
-$routes->get('produk/cari', 'ProdukUser::cari');
 
 $routes->get('tentang_kami', 'TentangKami::index');
 
 $routes->get('kontak', 'Kontak::index');
 $routes->post('kontak/send', 'Kontak::send');
+
 // ADMIN PESAN
 $routes->get('pesan', 'Pesan::index');
 $routes->get('pesan/(:num)', 'Admin\Pesan::detail/$1');

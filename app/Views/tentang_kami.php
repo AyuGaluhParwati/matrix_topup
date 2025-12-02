@@ -200,7 +200,7 @@
            data-aos-delay="200"
            class="bg-white rounded-xl shadow p-6 text-center hover:shadow-2xl transition transform hover:-translate-y-2 hover:rotate-1">
         <img 
-          src="https://i.pravatar.cc/200?img=13" 
+          src="http://downloader.minipul.com//uploads/WhatsApp%20Image%202025-12-01%20at%2010.51.38_11c6a721.jpg" 
           class="w-32 h-32 mx-auto rounded-full object-cover mb-4"
         >
         <h3 class="font-bold text-lg text-blue-800">Lanny</h3>
