@@ -20,6 +20,8 @@ $routes->post('register', 'Auth::saveUser');
 
 $routes->get('logout', 'Auth::logout');
 
+$routes->get('profil', 'profil::index');
+
 // Role-based pages
 $routes->get('home', 'Home::index'); // optional, karena '/' sudah mewakili home
 $routes->get('admin/dashboard', 'Admin::dashboard');

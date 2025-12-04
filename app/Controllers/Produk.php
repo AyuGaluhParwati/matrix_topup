@@ -115,4 +115,5 @@ class Produk extends Controller
         session()->setFlashdata('success', 'Produk berhasil dihapus.');
         return redirect()->to(base_url('produk'));
     }
+
 }

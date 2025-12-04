@@ -54,7 +54,7 @@
           <div class="flex items-center">
             <div class="text-3xl text-green-600 mr-4"><i class="fa-solid fa-cart-shopping"></i></div>
             <div>
-              <h3 class="text-xl font-bold">245</h3>
+              <h3 class="text-xl font-bold">246</h3>
               <p class="text-gray-500">Total Transaksi</p>
             </div>
           </div>
@@ -64,7 +64,7 @@
           <div class="flex items-center">
             <div class="text-3xl text-yellow-500 mr-4"><i class="fa-solid fa-tags"></i></div>
             <div>
-              <h3 class="text-xl font-bold">35</h3>
+              <h3 class="text-xl font-bold"><?= $total_produk ?></h3>
               <p class="text-gray-500">Total Produk</p>
             </div>
           </div>

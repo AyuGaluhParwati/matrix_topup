@@ -11,5 +11,5 @@ protected $table = 'produk';
     protected $allowedFields = [
         'nama_produk', 'slug', 'harga', 'deskripsi', 'gambar'
     ];
-
+    
 }

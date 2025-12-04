@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\PesanModel;  // <-- Tambahkan ini
+use App\Models\PesanModel;
+use App\Models\ProdukModel;
 
 class Admin extends BaseController
 {
@@ -14,8 +15,13 @@ class Admin extends BaseController
             return redirect()->to('/login')->with('error', 'Anda harus login sebagai admin.');
         }
 
-        $userModel = new UserModel();
-        $data['totalUsers'] = $userModel->countAllResults();
+        $userModel   = new UserModel();
+        $produkModel = new ProdukModel();
+
+        $data = [
+            'totalUsers'   => $userModel->countAllResults(),
+            'total_produk' => $produkModel->countAll(),   // <-- FIX DI SINI
+        ];
 
         return view('admin/dashboard', $data);
     }
