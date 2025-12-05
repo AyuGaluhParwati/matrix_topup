@@ -28,18 +28,36 @@
 </a>
 
 
-        <!-- TOMBOL KERANJANG (PENGGANTI LOGOUT) -->
-        <a href="<?= base_url('keranjang') ?>" 
-           class="relative px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition flex items-center gap-2">
+<!-- TOMBOL KERANJANG -->
+<a href="<?= base_url('keranjang') ?>"
+   class="relative w-12 h-12 bg-yellow-500 text-white rounded-full 
+          hover:bg-yellow-600 transition flex items-center justify-center">
 
-          <i class="fa fa-shopping-cart text-lg"></i>
-          <span>Keranjang</span>
+    <i class="fa fa-shopping-cart text-lg"></i>
 
-          <!-- Badge jumlah item (opsional) -->
-          <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
-            <?= $cart_count ?? 0 ?>
-          </span>
-        </a>
+    <!-- Badge jumlah item -->
+    <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs 
+                 px-1 py-0.5 rounded-full">
+        <?= $cart_count ?? 0 ?>
+    </span>
+</a>
+
+<!-- TOMBOL INBOX PESAN -->
+<a href="<?= base_url('pesan') ?>"
+   class="relative w-12 h-12 border border-blue-300 rounded-full 
+          hover:bg-blue-50 transition flex items-center justify-center">
+
+    <i class="fa-solid fa-envelope text-blue-600 text-xl"></i>
+
+    <?php if(isset($pesan_baru) && $pesan_baru > 0): ?>
+        <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs 
+                     px-1 py-0.5 rounded-full">
+            <?= $pesan_baru ?>
+        </span>
+    <?php endif; ?>
+
+</a>
+
 
       <?php else: ?>
         <!-- BELUM LOGIN -->
