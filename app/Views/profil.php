@@ -1,99 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MTRIX - Profil Akun</title>
+<?= $this->extend('layout') ?>
+<?= $this->section('content') ?>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<section class="bg-blue-600 text-white py-12 text-center shadow">
+  <h1 class="text-4xl font-bold">Profil Akun</h1>
+  <p class="mt-1 opacity-80">Kelola informasi akun top up game kamu</p>
+</section>
 
-  <!-- Font Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<main class="max-w-5xl mx-auto px-6 -mt-10">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-  <!-- Favicon -->
-  <link rel="icon" href="<?= base_url('favicon.ico') ?>">
-
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-  </style>
-</head>
-
-<body class="bg-gray-100 text-gray-800">
-
-  <!-- Header -->
-  <?php include 'partials/header.php'; ?>
-
-  <!-- HERO -->
-  <section class="pt-28 pb-12 bg-blue-700 text-white text-center shadow-md">
-    <div class="max-w-3xl mx-auto px-4">
-      <h1 class="text-4xl font-bold drop-shadow">Profil Akun</h1>
-      <p class="mt-2 text-blue-200 text-lg">Kelola informasi akun Anda di sini.</p>
+  <?php if (isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+    <div class="bg-green-100 text-green-700 border border-green-300 p-3 rounded mb-4">
+      Profil berhasil diperbarui!
     </div>
-  </section>
+  <?php endif; ?>
 
-  <!-- MAIN CONTENT -->
-  <section class="max-w-3xl mx-auto px-4 py-12">
+  <div class="bg-white rounded-2xl p-8 shadow">
 
-    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-
-      <!-- Info User -->
-      <div class="flex items-center gap-6 mb-10">
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      <div class="bg-gradient-to-r from-blue-600 to-orange-500 p-1 rounded-full">
         <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
-             class="h-28 w-28 rounded-full border-4 border-blue-100 shadow">
-
-        <div>
-          <p class="text-3xl font-bold text-gray-900"><?= session()->get('user_name') ?></p>
-          <p class="text-gray-500 text-sm mt-1">Member sejak: 2024</p>
-        </div>
+             class="w-32 h-32 bg-white rounded-full object-cover">
       </div>
 
-      <!-- DETAIL -->
-      <div class="space-y-6">
+      <div>
+        <h2 class="text-3xl font-bold"><?= $user['nama'] ?></h2>
+        <p class="text-gray-500 text-sm">Pemain sejak <?= date("Y", strtotime($user['created_at'])) ?></p>
+      </div>
+    </div>
 
-        <div>
-          <p class="font-semibold text-blue-700 text-sm">Email</p>
-          <p class="text-lg text-gray-800"><?= $email ?? '-' ?></p>
-        </div>
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <div>
-          <p class="font-semibold text-blue-700 text-sm">Nomor HP</p>
-          <p class="text-lg text-gray-800"><?= $phone ?? '-' ?></p>
-        </div>
-
-        <div>
-          <p class="font-semibold text-blue-700 text-sm">Saldo</p>
-          <p class="text-blue-600 text-3xl font-extrabold">
-            Rp <?= number_format($saldo ?? 0, 0, ',', '.') ?>
-          </p>
-        </div>
-
+      <div class="p-5 border rounded-xl">
+        <p class="text-sm text-gray-500 font-semibold">Email</p>
+        <p><?= $user['email'] ?></p>
       </div>
 
-      <!-- BUTTONS -->
-      <div class="mt-10 flex gap-4">
-        <a href="<?= base_url('topup') ?>"
-           class="px-6 py-3 bg-blue-700 text-white rounded-xl font-semibold hover:bg-blue-900 transition shadow">
-          Top-Up Saldo
-        </a>
+      <div class="p-5 border rounded-xl">
+        <p class="text-sm text-gray-500 font-semibold">Username</p>
+        <p><?= $user['username'] ?></p>
+      </div>
 
-        <a href="<?= base_url('logout') ?>"
-           class="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition shadow">
-          Logout
-        </a>
+      <div class="p-5 border rounded-xl">
+        <p class="text-sm text-gray-500 font-semibold">No. HP</p>
+        <p><?= $user['no_hp'] ?></p>
+      </div>
+
+      <div class="p-5 border rounded-xl">
+        <p class="text-sm text-gray-500 font-semibold">Platform Favorit</p>
+        <p><?= $user['favorit'] ?></p>
+      </div>
+
+      <div class="p-5 border rounded-xl bg-blue-50">
+        <p class="text-sm text-gray-500 font-semibold">Coin</p>
+        <p class="text-3xl font-bold text-blue-600 mt-1">
+          <?= number_format($user['coin']) ?>
+        </p>
+      </div>
+
+      <div class="p-5 border rounded-xl">
+        <p class="text-sm text-gray-500 font-semibold">Total Transaksi</p>
+        <p class="text-2xl font-bold mt-1"><?= $user['transaksi'] ?></p>
       </div>
 
     </div>
 
-  </section>
+    <div class="mt-10">
+      <h3 class="text-xl font-bold mb-3">Update Profil</h3>
 
-  <!-- Footer -->
-  <?php include 'partials/footer.php'; ?>
+      <form action="/profil/update" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-</body>
-</html>
+        <div>
+          <label class="font-semibold text-gray-600">Nama</label>
+          <input type="text" name="nama" value="<?= $user['nama'] ?>" class="w-full mt-1 p-3 border rounded-lg">
+        </div>
+
+        <div>
+          <label class="font-semibold text-gray-600">Email</label>
+          <input type="email" name="email" value="<?= $user['email'] ?>" class="w-full mt-1 p-3 border rounded-lg">
+        </div>
+
+        <div>
+          <label class="font-semibold text-gray-600">Username</label>
+          <input type="text" name="username" value="<?= $user['username'] ?>" class="w-full mt-1 p-3 border rounded-lg">
+        </div>
+
+        <div>
+          <label class="font-semibold text-gray-600">No. HP</label>
+          <input type="text" name="no_hp" value="<?= $user['no_hp'] ?>" class="w-full mt-1 p-3 border rounded-lg">
+        </div>
+
+        <div>
+          <label class="font-semibold text-gray-600">Platform Favorit</label>
+          <input type="text" name="favorit" value="<?= $user['favorit'] ?>" class="w-full mt-1 p-3 border rounded-lg">
+        </div>
+
+        <div>
+          <label class="font-semibold text-gray-600">Password Baru</label>
+          <input type="password" name="password" class="w-full mt-1 p-3 border rounded-lg" placeholder="Kosongkan jika tidak diganti">
+        </div>
+
+        <div class="md:col-span-2">
+          <button type="submit"
+                  class="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold w-full">
+            Simpan Perubahan
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<footer class="text-center text-sm text-gray-500 mt-10 py-6">
+  © 2025 MTRIX - Top Up Game
+</footer>
+
+<?= $this->endSection() ?>

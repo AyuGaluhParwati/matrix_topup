@@ -9,6 +9,10 @@ use CodeIgniter\Router\RouteCollection;
 // Halaman utama
 $routes->get('/', 'Home::index');
 
+// profil index and update
+$routes->get('/profile', 'Profile::index');
+$routes->post('/profile/update', 'Profile::update');
+
 // Auth (Login, Register, Logout)
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::loginProcess');
