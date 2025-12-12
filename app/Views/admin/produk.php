@@ -9,7 +9,7 @@
 
 <body class="bg-gray-100 font-sans text-gray-800">
 
-  <div class="flex min-h-screen">
+<div class="flex min-h-screen">
 
     <!-- Sidebar -->
     <aside class="w-64 bg-blue-700 text-white flex flex-col">
@@ -18,31 +18,25 @@
       </div>
 
       <nav class="flex-1 p-4 space-y-3">
-        <a href="<?= base_url('admin/dashboard') ?>" 
-           class="flex items-center p-2 rounded hover:bg-blue-600 transition">
+        <a href="<?= base_url('admin/dashboard') ?>" class="flex items-center p-2 rounded hover:bg-blue-600 transition">
           <i class="fa-solid fa-gauge mr-3"></i> Dashboard
         </a>
 
-        <a href="<?= base_url('admin/users') ?>" 
-           class="flex items-center p-2 rounded hover:bg-blue-600 transition">
+        <a href="<?= base_url('admin/users') ?>" class="flex items-center p-2 rounded hover:bg-blue-600 transition">
           <i class="fa-solid fa-users mr-3"></i> Pengguna
         </a>
 
-        <a href="#" 
-           class="flex items-center p-2 rounded hover:bg-blue-600 transition">
+        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-600 transition">
           <i class="fa-solid fa-cart-shopping mr-3"></i> Transaksi
         </a>
 
-        <a href="<?= base_url('produk') ?>" 
-           class="flex items-center p-2 rounded bg-blue-600 transition">
+        <a href="<?= base_url('produk') ?>" class="flex items-center p-2 rounded bg-blue-600 transition">
           <i class="fa-solid fa-tags mr-3"></i> Produk
         </a>
 
-        <a href="<?= base_url('pesan') ?>" 
-           class="flex items-center p-2 rounded bg-blue-600 transition">
+        <a href="<?= base_url('pesan') ?>" class="flex items-center p-2 rounded hover:bg-blue-600 transition">
           <i class="fa-solid fa-envelope mr-3"></i> Pesan
         </a>
-
       </nav>
 
       <div class="p-4 border-t border-blue-600">
@@ -73,7 +67,12 @@
 
           <div>
             <label class="font-medium">Kategori</label>
-            <input type="text" name="kategori" required class="w-full p-2 border rounded">
+            <select name="kategori_slug" required class="w-full p-2 border rounded">
+              <option value="">-- Pilih Kategori --</option>
+              <?php foreach ($kategori as $k): ?>
+                <option value="<?= $k['slug'] ?>"><?= $k['nama_kategori'] ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
 
           <div>
@@ -96,11 +95,10 @@
               Tambah Produk
             </button>
           </div>
-
         </form>
       </div>
 
-      <!-- Table -->
+      <!-- Table Produk -->
       <div class="bg-white shadow rounded-lg p-6">
         <table class="table-auto w-full border rounded-lg overflow-hidden">
           <thead>
@@ -124,18 +122,23 @@
               <td class="p-3"><?= $no++ ?></td>
 
               <td class="p-3">
-                <img src="<?= base_url('images/produk/' . $p['gambar']) ?>" 
-                     class="h-14 w-14 rounded object-cover">
+                <img src="<?= base_url('images/produk/' . $p['gambar']) ?>" class="h-14 w-14 rounded object-cover">
               </td>
 
               <td class="p-3"><?= $p['nama_produk'] ?></td>
-              <td class="p-3"><?= $p['kategori'] ?></td>
+              <td class="p-3"><?= $p['nama_kategori'] ?></td>
               <td class="p-3">Rp <?= number_format($p['harga'], 0, ',', '.') ?></td>
               <td class="p-3"><?= $p['deskripsi'] ?></td>
 
               <td class="p-3">
                 <button 
-                  onclick="openEditModal(`<?= $p['id_produk'] ?>`, `<?= esc($p['nama_produk']) ?>`, `<?= esc($p['kategori']) ?>`, `<?= esc($p['harga']) ?>`, `<?= esc($p['deskripsi']) ?>`)" 
+                  onclick="openEditModal(
+                    '<?= $p['id_produk'] ?>',
+                    '<?= esc($p['nama_produk']) ?>',
+                    '<?= esc($p['kategori_slug']) ?>',
+                    '<?= esc($p['harga']) ?>',
+                    '<?= esc($p['deskripsi']) ?>'
+                  )" 
                   class="text-yellow-600 hover:underline mr-3">
                   Edit
                 </button>
@@ -153,10 +156,11 @@
       </div>
 
     </main>
-  </div>
+</div>
 
-  <!-- Modal -->
-  <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<!-- Modal Edit -->
+<div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+
     <form id="editForm" class="bg-white p-6 rounded-lg w-[400px] shadow-md" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <h2 class="text-xl font-bold mb-4 text-blue-700">Edit Produk</h2>
@@ -167,7 +171,12 @@
       <input id="edit_nama" name="nama_produk" class="w-full p-2 border rounded mb-2">
 
       <label>Kategori</label>
-      <input id="edit_kategori" name="kategori" class="w-full p-2 border rounded mb-2">
+      <select name="kategori_slug" id="edit_kategori" class="w-full p-2 border rounded mb-2">
+        <option value="">-- Pilih Kategori --</option>
+        <?php foreach ($kategori as $k): ?>
+          <option value="<?= $k['slug'] ?>"><?= $k['nama_kategori'] ?></option>
+        <?php endforeach; ?>
+      </select>
 
       <label>Harga</label>
       <input id="edit_harga" name="harga" type="number" class="w-full p-2 border rounded mb-2">
@@ -183,24 +192,26 @@
         <button class="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Simpan</button>
       </div>
     </form>
-  </div>
+</div>
 
-  <script>
-    function openEditModal(id, nama, kategori, harga, deskripsi) {
-      document.getElementById('editModal').classList.remove('hidden');
-      edit_id.value = id;
-      edit_nama.value = nama;
-      edit_kategori.value = kategori;
-      edit_harga.value = harga;
-      edit_deskripsi.value = deskripsi;
+<script>
+function openEditModal(id, nama, kategori_slug, harga, deskripsi) {
 
-      document.getElementById('editForm').action = "<?= base_url('produk/update/') ?>" + id;
-    }
+  document.getElementById('editModal').classList.remove('hidden');
 
-    function closeEditModal() {
-      document.getElementById('editModal').classList.add('hidden');
-    }
-  </script>
+  edit_id.value = id;
+  edit_nama.value = nama;
+  document.getElementById('edit_kategori').value = kategori_slug;
+  edit_harga.value = harga;
+  edit_deskripsi.value = deskripsi;
+
+  document.getElementById('editForm').action = "<?= base_url('produk/update/') ?>" + id;
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.add('hidden');
+}
+</script>
 
 </body>
 </html>

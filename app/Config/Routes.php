@@ -9,8 +9,14 @@ use CodeIgniter\Router\RouteCollection;
 // Halaman utama
 $routes->get('/', 'Home::index');
 
+
 $routes->get('topup', 'Topup::index');
 $routes->post('topup/process', 'Topup::process');
+
+// profil index and update
+$routes->get('/profile', 'Profile::index');
+$routes->post('/profile/update', 'Profile::update');
+
 
 // Auth (Login, Register, Logout)
 $routes->get('login', 'Auth::login');
@@ -24,6 +30,7 @@ $routes->post('register', 'Auth::saveUser');
 $routes->get('logout', 'Auth::logout');
 
 $routes->get('profil', 'profil::index');
+$routes->post('/profil/update', 'Profil::update');
 
 // Role-based pages
 $routes->get('home', 'Home::index'); // optional, karena '/' sudah mewakili home
