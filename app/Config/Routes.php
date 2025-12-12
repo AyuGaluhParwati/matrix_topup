@@ -9,6 +9,9 @@ use CodeIgniter\Router\RouteCollection;
 // Halaman utama
 $routes->get('/', 'Home::index');
 
+$routes->get('topup', 'Topup::index');
+$routes->post('topup/process', 'Topup::process');
+
 // Auth (Login, Register, Logout)
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::loginProcess');
