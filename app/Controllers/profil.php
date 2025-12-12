@@ -4,33 +4,44 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 
-class Profile extends BaseController
+class Profil extends BaseController
 {
     public function index()
     {
         $userModel = new UserModel();
 
-        // id user login, contoh: 1
+        // ambil id user login
         $userId = session()->get('id');
 
+        // kirim sebagai $user agar sama dengan view
         $data['user'] = $userModel->find($userId);
 
-        return view('profile', $data);
+        return view('profil', $data);
     }
 
     public function update()
     {
         $userModel = new UserModel();
-
         $userId = session()->get('id');
 
-        $userModel->update($userId, [
-            'nama'    => $this->request->getPost('nama'),
-            'email'   => $this->request->getPost('email'),
-            'phone'   => $this->request->getPost('phone'),
-            'address' => $this->request->getPost('address'),
-        ]);
+        $data = [
+            'nama'     => $this->request->getPost('nama'),
+            'email'    => $this->request->getPost('email'),
+            'username' => $this->request->getPost('username'),
+            'no_hp'    => $this->request->getPost('no_hp'),
+            'favorit'  => $this->request->getPost('favorit'),
+        ];
 
-        return redirect()->to('/profile')->with('success', 'Profil berhasil diperbarui!');
+        // Jika password diisi → update dengan hash
+        if ($this->request->getPost('password')) {
+            $data['password'] = password_hash(
+                $this->request->getPost('password'),
+                PASSWORD_DEFAULT
+            );
+        }
+
+        $userModel->update($userId, $data);
+
+        return redirect()->to('/profil?status=success');
     }
 }

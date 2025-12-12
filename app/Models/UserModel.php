@@ -11,12 +11,12 @@ class UserModel extends Model
     protected $allowedFields = [
         'nama',
         'email',
+        'username',
+        'no_hp',
+        'favorit',
         'password',
-        'role',
-        'coin',         // tambah coin
-        'phone',        // tambah phone
-        'address',      // tambah address
-        'avatar',       // jika nanti pakai foto profil
+        'coin',
+        'avatar',
         'created_at',
         'updated_at'
     ];

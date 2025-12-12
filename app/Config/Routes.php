@@ -25,6 +25,7 @@ $routes->post('register', 'Auth::saveUser');
 $routes->get('logout', 'Auth::logout');
 
 $routes->get('profil', 'profil::index');
+$routes->post('/profil/update', 'Profil::update');
 
 // Role-based pages
 $routes->get('home', 'Home::index'); // optional, karena '/' sudah mewakili home
