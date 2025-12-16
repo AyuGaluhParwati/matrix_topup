@@ -27,6 +27,12 @@ $routes->get('register', 'Auth::register');
 // Proses form register
 $routes->post('register', 'Auth::saveUser');
 
+$routes->get('/forgot-password', 'Auth::forgotPassword');
+$routes->post('/forgot-password', 'Auth::sendResetLink');
+
+$routes->get('/reset-password/(:any)', 'Auth::resetPassword/$1');
+$routes->post('/reset-password', 'Auth::updatePassword');
+
 $routes->get('logout', 'Auth::logout');
 
 $routes->get('profil', 'profil::index');

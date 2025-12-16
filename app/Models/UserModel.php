@@ -6,10 +6,8 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'users';
+    protected $table      = 'users';
     protected $primaryKey = 'id';
-
-
 
     protected $allowedFields = [
         'nama',
@@ -20,10 +18,15 @@ class UserModel extends Model
         'password',
         'coin',
         'avatar',
+
+        // 🔐 reset password
+        'reset_token',
+        'reset_expired',
+
+        // timestamp
         'created_at',
         'updated_at'
     ];
 
     protected $useTimestamps = true;
-
 }

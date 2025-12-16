@@ -31,7 +31,7 @@ class Profil extends BaseController
         $data = [
             'user_name'     => $user['username'] ?? '',
             'email'         => $user['email'] ?? '',
-            'phone'         => $user['phone'] ?? '',
+            'no_hp'         => $user['no_hp'] ?? '',
             'saldo'         => $user['saldo'] ?? 0,
             'member_since'  => $user['created_at'] ?? '',
         ];
