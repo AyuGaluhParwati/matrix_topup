@@ -26,12 +26,15 @@
     <a href="<?= base_url('admin/users') ?>" class="flex items-center p-2 rounded hover:bg-blue-600">
       <i class="fa-solid fa-users mr-3"></i> Pengguna
     </a>
-    <a href="#" class="flex items-center p-2 rounded hover:bg-blue-600">
+    <a href="<?= base_url('admin/transaksi') ?>" class="flex items-center p-2 rounded hover:bg-blue-600">
       <i class="fa-solid fa-cart-shopping mr-3"></i> Transaksi
     </a>
     <a href="<?= base_url('produk') ?>" class="flex items-center p-2 rounded bg-blue-600">
       <i class="fa-solid fa-tags mr-3"></i> Produk
     </a>
+          <a href="<?= base_url('pesan') ?>" class="flex items-center p-2 rounded hover:bg-blue-600">
+        <i class="fa-solid fa-envelope mr-3"></i> Pesan
+      </a>
   </nav>
 
   <div class="p-4 border-t border-blue-600">
@@ -95,7 +98,6 @@
       <label class="font-medium">Deskripsi</label>
       <textarea name="deskripsi" rows="3"
                 class="w-full p-2 border rounded"></textarea>
-    </div>
 
     <div class="md:col-span-2 text-right">
       <button class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">

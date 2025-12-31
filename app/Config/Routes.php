@@ -76,6 +76,12 @@ $routes->get('transaksi/form/(:num)', 'Transaksi::form/$1', ['filter' => 'authTr
 $routes->post('transaksi/proses', 'Transaksi::proses', ['filter' => 'authTransaksi']);
 $routes->get('riwayat-transaksi', 'Transaksi::riwayat', ['filter' => 'auth']);
 
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes) {
+    $routes->get('transaksi', 'AdminTransaksi::transaksi');
+    $routes->get('transaksi/update/(:num)/(:segment)', 'AdminTransaksi::updateStatus/$1/$2');
+});
+
+
 
 
 

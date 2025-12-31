@@ -34,7 +34,7 @@
       <a href="<?= base_url('admin/users') ?>" class="flex items-center p-2 rounded hover:bg-blue-600">
         <i class="fa-solid fa-users mr-3"></i> Pengguna
       </a>
-      <a href="#" class="flex items-center p-2 rounded hover:bg-blue-600">
+      <a href="<?= base_url('admin/transaksi') ?>" class="flex items-center p-2 rounded hover:bg-blue-600">
         <i class="fa-solid fa-cart-shopping mr-3"></i> Transaksi
       </a>
       <a href="<?= base_url('produk') ?>" class="flex items-center p-2 rounded hover:bg-blue-600">
