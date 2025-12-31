@@ -27,11 +27,8 @@ $routes->get('register', 'Auth::register');
 // Proses form register
 $routes->post('register', 'Auth::saveUser');
 
-$routes->get('/forgot-password', 'Auth::forgotPassword');
-$routes->post('/forgot-password', 'Auth::sendResetLink');
-
-$routes->get('/reset-password/(:any)', 'Auth::resetPassword/$1');
-$routes->post('/reset-password', 'Auth::updatePassword');
+$routes->get('forgot-password', 'Auth::forgotPassword');
+$routes->post('forgot-password', 'Auth::forgotPasswordProcess');
 
 $routes->get('logout', 'Auth::logout');
 
@@ -75,6 +72,9 @@ $routes->get('pesan', 'Pesan::index');
 $routes->get('pesan/(:num)', 'Admin\Pesan::detail/$1');
 $routes->get('pesan/delete/(:num)', 'Admin\Pesan::delete/$1');
 
+$routes->get('transaksi/form/(:num)', 'Transaksi::form/$1', ['filter' => 'authTransaksi']);
+$routes->post('transaksi/proses', 'Transaksi::proses', ['filter' => 'authTransaksi']);
+$routes->get('riwayat-transaksi', 'Transaksi::riwayat', ['filter' => 'auth']);
 
 
 

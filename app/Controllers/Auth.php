@@ -76,84 +76,38 @@ class Auth extends BaseController
             ->with('success', 'Registrasi berhasil, silakan login.');
     }
 
-    // ================= FORGOT PASSWORD =================
+    // ================= FORGOT PASSWORD (SIMPLE) =================
     public function forgotPassword()
     {
         return view('auth/forgot_password');
     }
 
-    public function sendResetLink()
+    public function forgotPasswordProcess()
     {
         $model = new UserModel();
-        $emailInput = $this->request->getPost('email');
 
-        $user = $model->where('email', $emailInput)->first();
-        if (!$user) {
-            return redirect()->back()->with('error', 'Email tidak terdaftar.');
+        $email    = trim($this->request->getPost('email'));
+        $password = trim($this->request->getPost('password'));
+        $confirm  = trim($this->request->getPost('confirm_password'));
+
+        if (empty($email) || empty($password) || empty($confirm)) {
+            return redirect()->back()->with('error', 'Semua field wajib diisi.');
         }
-
-        $token = bin2hex(random_bytes(32));
-
-        $model->update($user['id'], [
-            'reset_token'   => $token,
-            'reset_expired' => date('Y-m-d H:i:s', strtotime('+1 hour'))
-        ]);
-
-        $resetLink = base_url("reset-password/$token");
-
-        $email = \Config\Services::email();
-        $email->setTo($emailInput);
-        $email->setSubject('Reset Password MTRIX');
-        $email->setMessage("
-            <h3>Reset Password</h3>
-            <p>Klik link berikut:</p>
-            <a href='{$resetLink}'>{$resetLink}</a>
-            <p>Link berlaku 1 jam.</p>
-        ");
-
-       if (!$email->send()) {
-    return redirect()->back()
-        ->with('error', $email->printDebugger(['headers']));
-}
-
-
-        return redirect()->back()->with('success', 'Link reset password telah dikirim ke email.');
-    }
-
-    // ================= RESET PASSWORD =================
-    public function resetPassword($token)
-    {
-        return view('auth/reset_password', ['token' => $token]);
-    }
-
-    public function updatePassword()
-    {
-        $model = new UserModel();
-        $token = $this->request->getPost('token');
-        $password = $this->request->getPost('password');
-        $confirm  = $this->request->getPost('confirm_password');
 
         if ($password !== $confirm) {
             return redirect()->back()->with('error', 'Konfirmasi password tidak cocok.');
         }
 
-        $user = $model
-            ->where('reset_token', $token)
-            ->where('reset_expired >=', date('Y-m-d H:i:s'))
-            ->first();
-
+        $user = $model->where('email', $email)->first();
         if (!$user) {
-            return redirect()->to('/login')
-                ->with('error', 'Token tidak valid atau kadaluarsa.');
+            return redirect()->back()->with('error', 'Email tidak terdaftar.');
         }
 
         $model->update($user['id'], [
-            'password'      => password_hash($password, PASSWORD_BCRYPT),
-            'reset_token'   => null,
-            'reset_expired' => null
+            'password' => password_hash($password, PASSWORD_BCRYPT)
         ]);
 
         return redirect()->to('/login')
-            ->with('success', 'Password berhasil direset.');
+            ->with('success', 'Password berhasil direset. Silakan login.');
     }
 }

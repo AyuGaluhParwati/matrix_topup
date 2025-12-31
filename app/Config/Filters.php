@@ -34,6 +34,10 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        // 🔐 custom filter kamu
+        'auth'           => \App\Filters\AuthFilter::class,
+        'admin'          => \App\Filters\AdminFilter::class,
+        'authTransaksi'  => \App\Filters\AuthTransaksiFilter::class,
     ];
 
     /**
@@ -107,4 +111,5 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [];
+
 }

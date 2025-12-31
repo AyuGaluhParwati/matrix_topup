@@ -9,13 +9,15 @@ class ProdukModel extends Model
     protected $table = 'produk';
     protected $primaryKey = 'id_produk';
 
-    protected $allowedFields = [
-        'nama_produk', 
-        'kategori_slug', 
-        'harga', 
-        'deskripsi', 
-        'gambar'
-    ];
+protected $allowedFields = [
+    'nama_produk', 
+    'kategori_slug', 
+    'tipe_game', // 🔥 TAMBAHKAN INI
+    'harga', 
+    'deskripsi', 
+    'gambar'
+];
+
 
     public function getProdukWithKategori()
     {
