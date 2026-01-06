@@ -136,11 +136,10 @@
         </p>
       </div>
 
-      <!-- BUTTON -->
-      <button type="submit"
-        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] transition text-white py-3 rounded-2xl font-bold shadow-lg">
-        <i class="fa-solid fa-credit-card mr-2"></i> Bayar Sekarang
-      </button>
+<button type="submit"
+  class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] transition text-white py-3 rounded-2xl font-bold shadow-lg">
+  <i class="fa-solid fa-credit-card mr-2"></i> Buat Transaksi
+</button>
     </form>
 
     <div class="text-center mt-5 pb-6">

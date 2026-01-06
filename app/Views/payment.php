@@ -41,7 +41,7 @@
       <!-- FORM PEMBAYARAN -->
       <form action="<?= base_url('topup/complete') ?>" method="POST" class="space-y-6">
 
-        <input type="hidden" name="coin" value="<?= $coin ?>">
+        <input type="hidden" name="saldo" value="<?= $saldo ?>">
         <input type="hidden" name="harga" value="<?= $harga ?>">
 
         <div>

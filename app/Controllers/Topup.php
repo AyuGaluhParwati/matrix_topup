@@ -6,6 +6,6 @@ class Topup extends BaseController
 {
     public function index()
     {
-        return view('topup');
+        return view('Top up/topup');
     }
 }

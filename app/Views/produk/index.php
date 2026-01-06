@@ -118,13 +118,10 @@
                   Rp <?= number_format($p['harga'], 0, ',', '.') ?>
                 </p>
 
-                <a
-                  href="<?= base_url('beli-sekarang/' . $p['id_produk']) ?>"
-                  class="bg-blue-600 text-white px-3 py-2 rounded text-sm
-                         hover:bg-blue-800 transition w-full font-semibold block text-center"
-                >
-                  Beli Sekarang
-                </a>
+              <a href="<?= base_url('transaksi/form/' . $p['id_produk']) ?>"
+                class="bg-blue-600 text-white px-3 py-2 rounded text-sm">
+                Beli Sekarang
+              </a>
               </div>
             </div>
           <?php endforeach; ?>

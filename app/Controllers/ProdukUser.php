@@ -90,4 +90,23 @@ class ProdukUser extends Controller
 
         return view('produk/kategori', $data);
     }
+    /**
+ * ============================
+ * HALAMAN BELI PRODUK
+ * ============================
+ */
+public function beliSekarang($id)
+{
+    $produk = $this->produkModel->find($id);
+
+    if (!$produk) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Produk dengan ID $id tidak ditemukan");
+    }
+
+    // Tampilkan view beli produk
+    return view('transaksi/form', [
+        'produk' => $produk
+    ]);
+}
+
 }

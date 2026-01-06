@@ -76,10 +76,20 @@ $routes->get('transaksi/form/(:num)', 'Transaksi::form/$1', ['filter' => 'authTr
 $routes->post('transaksi/proses', 'Transaksi::proses', ['filter' => 'authTransaksi']);
 $routes->get('riwayat-transaksi', 'Transaksi::riwayat', ['filter' => 'auth']);
 
+
+
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes) {
     $routes->get('transaksi', 'AdminTransaksi::transaksi');
     $routes->get('transaksi/update/(:num)/(:segment)', 'AdminTransaksi::updateStatus/$1/$2');
 });
+
+$routes->get('/bayar/(:num)', 'BayarController::index/$1');
+$routes->post('/bayar/proses', 'BayarController::proses');
+$routes->get('/bayar/sukses/(:num)', 'BayarController::sukses/$1');
+$routes->get('/bayar/gagal', 'BayarController::gagal');
+$routes->get('/bayar/invoice/(:num)', 'BayarController::invoice/$1');
+
+
 
 
 

@@ -26,8 +26,8 @@
 
   <!-- HERO -->
   <section class="pt-28 pb-10 bg-blue-700 text-white text-center shadow-md">
-    <h1 class="text-4xl font-bold drop-shadow">Top-Up Coin</h1>
-    <p class="mt-2 text-blue-200">Tambah coin akun Anda dengan cepat dan aman.</p>
+    <h1 class="text-4xl font-bold drop-shadow">Top-Up Saldo</h1>
+    <p class="mt-2 text-blue-200">Tambah saldo akun Anda dengan cepat dan aman.</p>
   </section>
 
   <!-- MAIN CONTENT -->
@@ -37,9 +37,9 @@
 
       <!-- Coin Saat Ini -->
       <div class="text-center mb-10">
-        <p class="text-gray-600 text-sm">Coin Anda saat ini:</p>
+        <p class="text-gray-600 text-sm">Saldo Anda saat ini:</p>
         <h2 class="text-4xl font-bold text-blue-700">
-          <?= number_format($saldo ?? 0, 0, ',', '.') ?> Coin
+          <?= number_format($saldo ?? 0, 0, ',', '.') ?> Saldo
         </h2>
       </div>
 
@@ -48,20 +48,20 @@
 
         <!-- Pilihan nominal -->
         <div>
-          <p class="font-semibold text-blue-700 text-sm mb-3">Pilih Jumlah Coin</p>
+          <p class="font-semibold text-blue-700 text-sm mb-3">Pilih Jumlah Saldo</p>
 
           <div class="grid grid-cols-2 gap-4">
-            <?php 
-              $nominalList = [100, 200, 500, 1000, 2000, 5000];
-              foreach ($nominalList as $nominal): 
-            ?>
-              <label class="border rounded-xl p-4 text-center cursor-pointer hover:bg-blue-50">
-                <input type="radio" name="nominal" value="<?= $nominal ?>" class="hidden peer">
-                <div class="peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 border rounded-xl p-3">
-                  <?= number_format($nominal, 0, ',', '.') ?> Coin
-                </div>
-              </label>
-            <?php endforeach; ?>
+          <?php 
+            $nominalList = [50000, 100000, 200000, 500000, 1000000, 2000000, 5000000];
+            foreach ($nominalList as $nominal): 
+          ?>
+            <label class="border rounded-xl p-4 text-center cursor-pointer hover:bg-blue-50">
+              <input type="radio" name="nominal" value="<?= $nominal ?>" class="hidden peer" required>
+              <div class="peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 border rounded-xl p-3">
+                Rp <?= number_format($nominal, 0, ',', '.') ?>
+              </div>
+            </label>
+          <?php endforeach; ?>
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\ProdukModel;
@@ -12,7 +13,7 @@ class Transaksi extends BaseController
         $produk = $produkModel->find($id);
 
         if (!$produk) {
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Produk tidak ditemukan');
         }
 
         return view('transaksi/form', [
@@ -32,22 +33,39 @@ class Transaksi extends BaseController
             return redirect()->back()->with('error', 'Produk tidak ditemukan');
         }
 
+        $jumlah   = (int) $this->request->getPost('jumlah');
+        $promo    = strtoupper($this->request->getPost('kode_promo'));
         $tipeGame = $produk['tipe_game'];
 
-        // ================= DATA DASAR =================
+        // ================= HITUNG HARGA =================
+        $subtotal = $produk['harga'] * $jumlah;
+
+        $diskon = 0;
+        if ($promo === 'HEMAT10') $diskon = 10;
+        if ($promo === 'MTRIX20') $diskon = 20;
+
+        $totalBayar = $subtotal - ($subtotal * $diskon / 100);
+
+        // ================= DATA TRANSAKSI =================
         $data = [
-            'user_id'   => session()->get('user_id'),
-            'produk_id'=> $produkId,
-            'tipe_game'=> $tipeGame,
-            'jumlah'   => $this->request->getPost('jumlah'),
-            'nama'     => $this->request->getPost('nama'),
-            'kontak'   => $this->request->getPost('kontak'),
-            'promo'    => $this->request->getPost('kode_promo'),
-            'status'   => 'pending',
-            'created_at' => date('Y-m-d H:i:s')
+            'user_id'      => session()->get('user_id'),
+            'produk_id'    => $produkId,
+            'nama_produk'  => $produk['nama_produk'],
+            'tipe_game'    => $tipeGame,
+            'harga'        => $produk['harga'],
+            'jumlah'       => $jumlah,
+            'kode_promo'   => $promo,
+            'diskon'       => $diskon,
+            'total_bayar'  => $totalBayar, // ✅ FIX FINAL
+
+            'nama'         => $this->request->getPost('nama'),
+            'kontak'       => $this->request->getPost('kontak'),
+
+            'status'       => 'pending',
+            'created_at'   => date('Y-m-d H:i:s')
         ];
 
-        // ================= ML =================
+        // ================= MOBILE LEGENDS =================
         if ($tipeGame === 'ml') {
             $userGame = $this->request->getPost('user_game');
             $server   = $this->request->getPost('server');
@@ -55,13 +73,13 @@ class Transaksi extends BaseController
             if (!$userGame || !$server) {
                 return redirect()->back()
                     ->withInput()
-                    ->with('error', 'User ID dan Server wajib diisi');
+                    ->with('error', 'User ID dan Server Mobile Legends wajib diisi');
             }
 
             $data['user_game'] = $userGame;
             $data['server']    = $server;
-            $data['username'] = null;
-            $data['password'] = null;
+            $data['username']  = null;
+            $data['password']  = null;
         }
 
         // ================= ROBLOX =================
@@ -75,23 +93,29 @@ class Transaksi extends BaseController
                     ->with('error', 'Username dan Password Roblox wajib diisi');
             }
 
-            $data['username'] = $username;
-            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+            $data['username']  = $username;
+            $data['password']  = password_hash($password, PASSWORD_DEFAULT);
             $data['user_game'] = null;
             $data['server']    = null;
         }
 
-        // ================= SIMPAN =================
+        // ================= SIMPAN TRANSAKSI =================
         $transaksiModel->insert($data);
+        $transaksiId = $transaksiModel->getInsertID();
 
-        return redirect()->to('/riwayat-transaksi')
-            ->with('success', 'Transaksi berhasil dibuat');
+        // ================= REDIRECT KE PEMBAYARAN =================
+        return redirect()->to('/bayar/' . $transaksiId)
+            ->with('success', 'Transaksi berhasil dibuat, silakan lakukan pembayaran');
     }
 
     public function riwayat()
     {
-        $model = new TransaksiModel();
-        $data['transaksi'] = $model->getByUser(session()->get('user_id'));
+        $transaksiModel = new TransaksiModel();
+
+        $data['transaksi'] = $transaksiModel
+            ->where('user_id', session()->get('user_id'))
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
 
         return view('transaksi/riwayat', $data);
     }

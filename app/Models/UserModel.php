@@ -16,7 +16,7 @@ class UserModel extends Model
         'no_hp',
         'favorit',
         'password',
-        'coin',
+        'saldo',
         'avatar',
 
         // 🔐 reset password
